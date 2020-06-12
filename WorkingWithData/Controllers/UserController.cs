@@ -36,15 +36,7 @@ namespace WorkingWithData.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(UserInputModel input)
         {
-            foreach (var item in ModelState)
-            {
-                _logger.LogInformation($"{item.Key} : \n");
-
-                foreach (var error in item.Value.Errors)
-                {
-                    _logger.LogInformation(error.ErrorMessage);
-                }
-            }
+            _logger.LogInformation(System.Text.Json.JsonSerializer.Serialize(ModelState));
 
             if (!ModelState.IsValid)
             {
